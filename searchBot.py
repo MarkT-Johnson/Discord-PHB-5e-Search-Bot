@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD = os.getenv("DISCORD_GUILD")
-NAME = os.getenv("DISCORD_NAME")
 client = discord.Client()
 guild = None
 bot = None
@@ -51,16 +50,18 @@ async def on_ready():
         f'{guild.name}(id: {guild.id})'
     )
 
-    online = []
-    for mem in guild.members:
-        if (mem.status == discord.Status.online or mem.status == discord.Status.idle) and mem != bot:
-            online.append(mem)
-    channel = client.get_channel(662892613250056192)
-    await channel.send("I am the bot.")
-    message = ""
-    for active in online:
-        message = message + f'\nHello {active.name}'
-    await channel.send(message)
+    # Greets all members that are online at the moment the bot is ready
+
+    # online = []
+    # for mem in guild.members:
+    #     if (mem.status == discord.Status.online or mem.status == discord.Status.idle) and mem != bot:
+    #         online.append(mem)
+    # channel = client.get_channel(662892613250056192)
+    # await channel.send("I am the bot.")
+    # message = ""
+    # for active in online:
+    #     message = message + f'\nHello {active.name}'
+    # await channel.send(message)
 
     members = '\n ~ '.join([member.name for member in guild.members])
     print(f'Guild Members:\n ~ {members}')
